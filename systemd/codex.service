@@ -1,0 +1,16 @@
+[Unit]
+Wants=network-online.target
+After=network-online.target
+Description=Cordée (RAG HTTP – FastAPI + ChromaDB + fastembed)
+
+[Service]
+User=nexus
+EnvironmentFile=-/etc/default/codex
+WorkingDirectory=/home/nexus/codex
+ExecStart=/home/nexus/codex/venv/bin/python /home/nexus/codex/main.py
+Restart=on-failure
+RestartSec=2
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

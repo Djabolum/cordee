@@ -1,0 +1,23 @@
+name: Bug report
+description: Signaler un bug
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Que s'est-il passé ?
+      description: Décrivez le bug, le résultat attendu, et comment le reproduire.
+      placeholder: ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Tag/commit impacté
+      placeholder: v0.1.0
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / captures
+      render: shell

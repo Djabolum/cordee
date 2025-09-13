@@ -1,12 +1,14 @@
 # Cordée
 
+[![CI](https://github.com/Djabolum/cordee/actions/workflows/ci.yml/badge.svg)](https://github.com/Djabolum/cordee/actions/workflows/ci.yml) [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+
 Petit serveur RAG minimal (ChromaDB + FastAPI + fastembed) pensé pour tourner sur un Pi, avec unités systemd et tests de fumée.
 
 ## Pourquoi “Cordée” ?
 Clin d’œil aux Cordée en Haute‑Savoie 😉
 
 ## Licence
-Par défaut **Apache‑2.0** (brevet + clause de contribution). Tu peux basculer vers **MIT** tant qu’il n’y a pas encore de contributions externes (voir section *Changer de licence* ci‑dessous).
+Par défaut **Apache‑2.0** (https://img.shields.io/badge/License-Apache_2.0-blue.svg). Tu peux basculer vers **MIT** tant qu’il n’y a pas encore de contributions externes (voir section *Changer de licence* ci‑dessous).
 
 ---
 
@@ -16,18 +18,21 @@ Par défaut **Apache‑2.0** (brevet + clause de contribution). Tu peux basculer
 - Accès Internet au premier lancement (téléchargement du modèle d’embedding)
 
 ## Installation locale (dev)
+Installation rapide (dev local) :
 ```bash
-git clone <TON_URL_REPO> cordee && cd cordee
+git clone https://github.com/Djabolum/cordee.git cordee
+cd cordee
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-# Lancer en dev
+
+# Lancer le serveur en dev
 python src/rag_http.py
-# Santé
-curl -s http://127.0.0.1:8008/health
+
+# Vérifier la santé
+curl -fsS http://127.0.0.1:8008/health
 ```
 
-## Déploiement système (prod légère sur Pi)
-1) Copier le dépôt dans **/opt/valexa** (chemin utilisé par les unités) :
+Alternative : installation sous /opt/valexa (voir le bloc juste en dessous).
 ```bash
 sudo mkdir -p /opt/valexa && sudo chown -R $USER:$USER /opt/valexa
 rsync -a --delete ./ /opt/valexa/

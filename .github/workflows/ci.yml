@@ -28,7 +28,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install ruff==0.6.9 black==24.8.0 pytest==8.3.2
+          pip install ruff==0.6.9 black==24.8.0 pytest==8.3.2 pytest-cov==5.0.0
 
       - name: Lint (ruff)
         run: ruff check .
@@ -36,5 +36,18 @@ jobs:
       - name: Format check (black)
         run: black --check .
 
-      - name: Tests
-run: PYTHONPATH=src CORDEE_CI=1 pytest -q       
+      - name: Tests (offline with coverage)
+        env:
+          PYTHONPATH: src
+          CORDEE_CI: '1'
+        run: |
+          pytest -q --maxfail=1 --disable-warnings \
+            --cov=src --cov=tests --cov-report=term-missing \
+            --cov-report=xml:coverage.xml --cov-fail-under=70
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: coverage.xml
+

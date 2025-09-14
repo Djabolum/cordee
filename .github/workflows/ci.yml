@@ -37,4 +37,4 @@ jobs:
         run: black --check .
 
       - name: Tests
-        run: PYTHONPATH=src CORDEE_CI=1 pytest -q
+run: PYTHONPATH=src CORDEE_CI=1 pytest -q       

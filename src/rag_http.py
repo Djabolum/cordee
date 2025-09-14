@@ -114,4 +114,4 @@ def query(payload: QueryPayload):
     collection = get_collection()
     embeddings = embedder([payload.query])
     result = collection.query(query_embeddings=embeddings, n_results=payload.n_results)
-    return result
+    return {"ok": True, "result": result}

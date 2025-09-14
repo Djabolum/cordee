@@ -3,9 +3,18 @@ import importlib
 import os
 
 
-def test_health():
+def _load_app(tmp_path):
+    # Ensure CI mode and a writable CHROMA_PATH for tests
     os.environ.setdefault("CORDEE_CI", "1")
-    app = getattr(importlib.import_module("rag_http"), "app")
+    os.environ.setdefault("CHROMA_PATH", str(tmp_path / "index"))
+    mod = importlib.import_module("rag_http")
+    # Reload to pick up env if module was already imported
+    mod = importlib.reload(mod)
+    return getattr(mod, "app")
+
+
+def test_health(tmp_path):
+    app = _load_app(tmp_path)
     with TestClient(app) as client:
         r = client.get("/health")
         assert r.status_code == 200
@@ -15,9 +24,8 @@ def test_health():
         assert "model" in body
 
 
-def test_query_offline():
-    os.environ.setdefault("CORDEE_CI", "1")
-    app = getattr(importlib.import_module("rag_http"), "app")
+def test_query_offline(tmp_path):
+    app = _load_app(tmp_path)
     with TestClient(app) as client:
         r = client.post("/query", json={"query": "hello", "n_results": 1})
         assert r.status_code == 200

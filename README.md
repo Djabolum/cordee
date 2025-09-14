@@ -27,11 +27,30 @@ cd cordee
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
+# Option Makefile (installe aussi ruff/black/pytest/pytest-cov)
+make dev
+
 # Lancer le serveur en dev
 python src/rag_http.py
 
 # Vérifier la santé
 curl -fsS http://127.0.0.1:8008/health
+```
+
+Alternative avec uvicorn (reload en dev) :
+```bash
+uvicorn src.rag_http:app --host 127.0.0.1 --port 8008 --reload
+```
+
+Tests locaux (offline, sans téléchargement de modèles) :
+```bash
+# Ajoute src au PYTHONPATH via pytest.ini, active le mode offline
+CORDEE_CI=1 pytest -q
+
+# Avec rapport de couverture (aligné CI, seuil 70%)
+CORDEE_CI=1 pytest -q \
+  --cov=src --cov=tests --cov-report=term-missing \
+  --cov-report=xml:coverage.xml --cov-fail-under=70
 ```
 
 Alternative : installation sous /opt/valexa (voir le bloc juste en dessous).
@@ -72,6 +91,19 @@ chmod +x scripts/smoke_rag.sh
 ./scripts/smoke_rag.sh
 ```
 
+## API
+
+- GET `/health`
+  - Réponse: `{ "ok": true, "collection": "...", "model": "..." }`
+
+- POST `/upsert`
+  - Corps: `{ "ids": [...], "documents": [...], "metadatas": [...] }`
+  - Réponse: `{ "ok": true, "n": <int> }`
+
+- POST `/query`
+  - Corps: `{ "query": "salut monde", "n_results": 2 }`
+  - Réponse: `{ "ok": true, "result": { "ids": [[...]], "documents": [[...]], ... } }`
+
 ### Arborescence
 ```
 cordee/
@@ -85,9 +117,26 @@ cordee/
 
 ## Variables utiles
 - `FASTEMBED_MODEL` : modèle d’embedding (par défaut : `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`).
-- `RAG_INDEX_PATH` : chemin du store Chroma (défaut `/opt/valexa/index`).
+- `CHROMA_PATH` : chemin du store Chroma (défaut `/opt/cordee/index`).
 - `RAG_HOST` / `RAG_PORT` : interface/port HTTP (défaut `127.0.0.1:8008`).
 - `HF_HOME` / `HUGGINGFACE_HUB_CACHE` : caches modèles HF.
+
+Notes CI:
+- Les tests CI tournent en mode offline avec `CORDEE_CI=1` et `CHROMA_PATH=.chroma`.
+- La configuration `pytest.ini` ajoute `src` au chemin Python et limite les tests au dossier `tests`.
+
+## Contrib (pre-commit)
+Active les hooks de lint/format locaux pour aligner avec la CI :
+```bash
+# via Makefile
+make hooks
+
+# ou manuellement
+pip install pre-commit && pre-commit install
+# Exécuter sur tout le dépôt si besoin
+pre-commit run -a
+```
+Hooks actifs : Ruff (avec `--fix`) et Black (versions alignées avec la CI).
 
 ## Changer de licence plus tard ?
 - **Oui tant qu’il n’y a pas de contributions externes** (tu es le seul ayant‑droit). Après contributions, il faut leur accord ou un CLA.

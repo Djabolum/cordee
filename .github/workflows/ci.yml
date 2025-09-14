@@ -39,6 +39,7 @@ jobs:
       - name: Tests (offline with coverage)
         env:
           CORDEE_CI: '1'
+          CHROMA_PATH: .chroma
         run: |
           pytest -q --maxfail=1 --disable-warnings \
             --cov=src --cov=tests --cov-report=term-missing \

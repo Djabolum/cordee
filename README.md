@@ -27,6 +27,9 @@ cd cordee
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
+# Option Makefile (installe aussi ruff/black/pytest/pytest-cov)
+make dev
+
 # Lancer le serveur en dev
 python src/rag_http.py
 
@@ -43,6 +46,11 @@ Tests locaux (offline, sans téléchargement de modèles) :
 ```bash
 # Ajoute src au PYTHONPATH via pytest.ini, active le mode offline
 CORDEE_CI=1 pytest -q
+
+# Avec rapport de couverture (aligné CI, seuil 70%)
+CORDEE_CI=1 pytest -q \
+  --cov=src --cov=tests --cov-report=term-missing \
+  --cov-report=xml:coverage.xml --cov-fail-under=70
 ```
 
 Alternative : installation sous /opt/valexa (voir le bloc juste en dessous).
@@ -120,8 +128,11 @@ Notes CI:
 ## Contrib (pre-commit)
 Active les hooks de lint/format locaux pour aligner avec la CI :
 ```bash
-pip install pre-commit
-pre-commit install
+# via Makefile
+make hooks
+
+# ou manuellement
+pip install pre-commit && pre-commit install
 # Exécuter sur tout le dépôt si besoin
 pre-commit run -a
 ```

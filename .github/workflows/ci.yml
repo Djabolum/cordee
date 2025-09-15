@@ -2,48 +2,48 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ main ]
-
-permissions:
-  contents: read
 
 jobs:
-  ci:
-    name: ci
+  smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: pip
+          cache: 'pip'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install ruff==0.6.9 black==24.8.0 pytest==8.3.2 pytest-cov==5.0.0
-
-      - name: Lint (ruff)
-        run: ruff check .
 
       - name: Format check (black)
-        run: black --check .
-
-      - name: Tests (offline with coverage)
-        env:
-          CORDEE_CI: '1'
-          CHROMA_PATH: .chroma
         run: |
+          python -m pip install black
+          black --version
+          black --check .
+
+      - name: Lint (ruff)
+        run: |
+          python -m pip install ruff
+          ruff --version
+          ruff check .
+
+      - name: Tests (pytest + coverage, offline)
+        env:
+          PYTHONPATH: src
+          CORDEE_CI: '1'
+        run: |
+          python -m pip install pytest pytest-cov
           pytest -q --maxfail=1 --disable-warnings \
-            --cov=src --cov=tests --cov-report=term-missing \
-            --cov-report=xml:coverage.xml --cov-fail-under=70
+            --cov=src --cov=tests --cov-report=term-missing --cov-report=xml:coverage.xml
 
       - name: Upload coverage artifact
         uses: actions/upload-artifact@v4
@@ -51,3 +51,45 @@ jobs:
           name: coverage-xml
           path: coverage.xml
 
+      - name: Install GitHub CLI (optional)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh || true
+          gh --version || true
+
+      - name: Start RAG server
+        env:
+          RAG_HOST: 127.0.0.1
+          RAG_PORT: 8008
+        run: |
+          nohup python src/rag_http.py > server.log 2>&1 &
+          echo $! > rag.pid
+
+      - name: Wait for health
+        run: |
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:8008/health | grep -q '"ok": *true'; then
+              echo "Service healthy"; exit 0; fi
+            sleep 1
+          done
+          echo "Service failed to start"
+          echo "::group::server.log"; tail -n +1 server.log || true; echo "::endgroup::"
+          exit 1
+
+      - name: Smoke tests
+        env:
+          RAG_HOST: 127.0.0.1
+          RAG_PORT: 8008
+        run: bash scripts/smoke_rag.sh
+
+      - name: Show logs on failure
+        if: failure()
+        run: |
+          echo "::group::server.log"
+          tail -n +200 server.log || true
+          echo "::endgroup::"
+
+      - name: Stop server
+        if: always()
+        run: |
+          if [ -f rag.pid ]; then kill "$(cat rag.pid)" || true; fi

@@ -59,6 +59,8 @@ jobs:
 
       - name: Start RAG server
         env:
+          CORDEE_CI: '1'
+          CHROMA_PATH: .chroma
           RAG_HOST: 127.0.0.1
           RAG_PORT: 8008
         run: |

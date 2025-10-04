@@ -153,19 +153,19 @@ export EMOTIONAL_ENGINE_ENABLED=true
 
 **Endpoints principaux :**
 
-- **GET** `/ritual/library` - Bibliothèque des archétypes
-- **POST** `/ritual/execute` - Exécuter un priming
-- **POST** `/ritual/complete` - Compléter session priming
+- **GET** `/archetype/library` - Bibliothèque des archétypes
+- **POST** `/archetype/execute` - Exécuter un priming archétypal
+- **POST** `/archetype/complete` - Compléter une session de priming
 - **GET** `/emotional/profile/{user_id}` - Profil émotionnel utilisateur
-- **POST** `/emotional/state` - Mise à jour état émotionnel
-- **GET** `/ritual/active` - Sessions de priming en cours
-- **GET** `/health/full` - Health check étendu
+- **POST** `/emotional/state` - Mise à jour de l'état émotionnel
+- **GET** `/archetype/active` - Sessions de priming en cours
+- **GET** `/health/full` - Contrôle de santé étendu
 
 **Usage interne du moteur émotionnel :**
 
 ```python
 # cordee/core/emotional_engine.py (extrait d'implémentation)
-from .rituals_internal import RITUALS, get_ritual
+from .archetypes_internal import ARCHETYPES, get_archetype
 
 def archetype_priming(state):
     """
@@ -174,13 +174,13 @@ def archetype_priming(state):
     """
     # Exemple simple (à raffiner plus tard) :
     if state.user_signal == "start":
-        r = get_ritual("fil_daube")
+        r = get_archetype("fil_daube")
     elif state.conflict_level > 0.7:
-        r = get_ritual("pont_silencieux")
+        r = get_archetype("pont_silencieux")
     elif state.voice_shakiness > 0.5:
-        r = get_ritual("voix_nue")
+        r = get_archetype("voix_nue")
     else:
-        r = get_ritual("racine_calme")
+        r = get_archetype("racine_calme")
 
     state.apply_color(r.color_hex)       # interne: modulation UI/intensity
     state.apply_tone(r.note_hz)          # interne: régulateur audio/feedback
@@ -192,13 +192,13 @@ def archetype_priming(state):
 **Exemples d'utilisation d'API :**
 
 ```bash
-# Lister tous les rituels
-curl http://127.0.0.1:8008/ritual/library
+# Lister tous les archétypes
+curl http://127.0.0.1:8008/archetype/library
 
 # Exécuter priming de base
-curl -X POST http://127.0.0.1:8008/ritual/execute \
+curl -X POST http://127.0.0.1:8008/archetype/execute \
   -H "Content-Type: application/json" \
-  -d '{"ritual_name": "ce_qui_est_la", "user_id": "test_user"}'
+  -d '{"archetype_name": "ce_qui_est_la", "user_id": "test_user"}'
 
 # Mettre à jour état émotionnel
 curl -X POST http://127.0.0.1:8008/emotional/state \
@@ -329,8 +329,8 @@ CORDEE_CI=1 pytest -q \
 # Test rapide des archétypes internes
 python test_simple.py
 
-# Tests des rituels internes complets
-python tests/test_archetypes_internal.py
+# Tests des archétypes internes complets
+python tests/test_archetypes.py
 
 # Tests complets avec moteur émotionnel
 EMOTIONAL_ENGINE_ENABLED=true pytest tests/

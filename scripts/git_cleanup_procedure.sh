@@ -1,5 +1,6 @@
 #!/bin/bash
-# Procédure de nettoya# 6. Tests rapides
+# Procédure de nettoyage
+# 6. Tests rapides
 echo "6️⃣ Vérification des tests..."
 python test_simple.py
 python tests/test_archetypes.py

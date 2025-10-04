@@ -7,7 +7,7 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from cordee.core.archetypes_internal import ARCHETYPES, get_archetype, Archetype
+from cordee.core.archetypes_internal import ARCHETYPES, get_archetype
 from cordee.core.emotional_engine import (
     archetype_priming,
     EmotionalState,

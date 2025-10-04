@@ -50,7 +50,7 @@ git add README.md
 # 6. Tests rapides
 echo "6️⃣ Vérification des tests..."
 python test_simple.py
-python tests/test_rituals.py
+python tests/test_archetypes.py
 
 # 7. Commit atomique
 echo "7️⃣ Commit des changements..."

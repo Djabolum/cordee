@@ -1,5 +1,6 @@
 #!/bin/bash
-# Procédure de nettoya# 6. Tests rapides
+# Procédure de nettoyage
+# 6. Tests rapides
 echo "6️⃣ Vérification des tests..."
 python test_simple.py
 python tests/test_archetypes.py
@@ -49,17 +50,17 @@ git add README.md
 # 6. Tests rapides
 echo "6️⃣ Vérification des tests..."
 python test_simple.py
-python tests/test_rituals.py
+python tests/test_archetypes.py
 
 # 7. Commit atomique
 echo "7️⃣ Commit des changements..."
-git commit -m "chore(cordee): internalize archetypal rituals; remove public exposure
+git commit -m "chore(cordee): internalize archetypes; remove public exposure
 
-- Add rituals_internal.py with 10 archetypal rituals (internal use only)
+- Add archetypes_internal.py with 10 emotional archetypes (internal use only)
 - Add emotional_engine.py for internal priming logic
 - Add comprehensive test suite
 - Update README with internal usage examples
-- No public API exposure of ritual content
+- No public API exposure of archetype content
 - Ready for engine integration"
 
 echo ""

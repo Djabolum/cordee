@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.venv/
+.env
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+ipynb_checkpoints/
+*.egg-info/
+.coverage
+coverage.xml
+
+# Node / front
+node_modules/
+dist/
+.build/
+.next/
+.parcel-cache/
+
+# Données / caches / index
+logs/
+**/*.log
+data/
+.opt/
+.huggingface/
+.cache/
+.chroma/
+index/
+/opt/valexa/index/
+
+# OS / éditeur
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+\n+# Nested repo to ignore
+cordee/

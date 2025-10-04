@@ -1,0 +1,18 @@
+[Unit]
+Description=Cordée (RAG HTTP – FastAPI + ChromaDB + fastembed)
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+User=nexus
+EnvironmentFile=-/etc/default/valexa-rag
+WorkingDirectory=/opt/valexa
+ExecStart=/opt/valexa/.venv/bin/python /opt/valexa/src/rag_http.py
+Restart=on-failure
+RestartSec=2
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

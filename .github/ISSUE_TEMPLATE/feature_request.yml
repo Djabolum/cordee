@@ -1,0 +1,16 @@
+name: Feature request
+description: Proposer une amélioration
+labels: [enhancement]
+body:
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Problème à résoudre
+      description: Quel besoin couvre cette feature ?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposition
+      description: Décrivez l'idée, l'API, l'UX attendue.

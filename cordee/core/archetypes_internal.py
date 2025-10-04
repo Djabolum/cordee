@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
-__all__ = ['Archetype', 'ARCHETYPES', 'get_archetype']
+__all__ = ['ARCHETYPES', 'get_archetype']
 
 @dataclass(frozen=True)
 class Archetype:

@@ -12,7 +12,7 @@ Petit serveur RAG minimal (ChromaDB + FastAPI + fastembed) pensé pour tourner s
 
 ### 📖 Contexte
 
-- **Cordée** est le squelette open-source initial : un petit serveur RAG minimal, basé sur FastAPI + ChromaDB.  
+- **Cordée** est le squelette open-source initial : un petit serveur RAG minimal, basé sur FastAPI + ChromaDB.
 - **Cordée-Authentic** est son évolution commerciale : un moteur d'analyse émotionnelle (texte, audio, bientôt vidéo) conçu pour détecter la sincérité dans les échanges humains.
 
 ---
@@ -54,8 +54,8 @@ Petit serveur RAG minimal (ChromaDB + FastAPI + fastembed) pensé pour tourner s
 
 ### 🤝 Soutenir le projet
 
-Cordée-Authentic est en partie sponsorisé par la communauté.  
-En devenant sponsor GitHub, vous soutenez le développement d'une IA éthique qui replace la **sincérité** au cœur de nos échanges.  
+Cordée-Authentic est en partie sponsorisé par la communauté.
+En devenant sponsor GitHub, vous soutenez le développement d'une IA éthique qui replace la **sincérité** au cœur de nos échanges.
 
 👉 [💜 Devenir sponsor](https://github.com/sponsors/Djabolum)
 
@@ -173,7 +173,7 @@ def archetype_priming(state):
     Aucune donnée archétypale n'est renvoyée au client.
     """
     # Exemple simple (à raffiner plus tard) :
-    if state.user_signal == "start": 
+    if state.user_signal == "start":
         r = get_ritual("fil_daube")
     elif state.conflict_level > 0.7:
         r = get_ritual("pont_silencieux")

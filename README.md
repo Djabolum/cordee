@@ -8,56 +8,127 @@ Petit serveur RAG minimal (ChromaDB + FastAPI + fastembed) pensé pour tourner s
 
 ---
 
-## 🌿 Cordée → Cordée-Authentic
+## �🇷 Version Française
 
-### 📖 Contexte
+### 🌿 Cordée-Authentic
+**Le moteur de clarté émotionnelle**
 
-- **Cordée** est le squelette open-source initial : un petit serveur RAG minimal, basé sur FastAPI + ChromaDB.
-- **Cordée-Authentic** est son évolution commerciale : un moteur d'analyse émotionnelle (texte, audio, bientôt vidéo) conçu pour détecter la sincérité dans les échanges humains.
+Cordée-Authentic est un système hybride d'IA conçu pour analyser l'authenticité émotionnelle dans le langage, la voix (et bientôt la vidéo).
+
+Il s'adresse à la fois :
+- 👤 **au grand public** : introspection, auto-coaching, sincérité dans ses échanges,
+- 💼 **aux professionnels** : coachs, RH, médias, analystes, entreprises.
+
+### 🚀 Pourquoi Cordée-Authentic ?
+
+Dans un monde saturé de discours optimisés et de "fake sincerity", Cordée-Authentic permet de :
+
+- **Détecter** les signaux d'alignement ou de tension (voix, texte, bientôt micro-expressions),
+- **Offrir** un feedback sincérité utilisable en coaching, introspection ou analyse,
+- **Donner** un tableau de bord clair pour particuliers comme pour entreprises.
+
+> *"Vos mots portent du poids. Mesurons-le avec sens."*
+
+### 🤖 Fonctionnalités
+
+- ✅ Analyse texte + audio en temps réel (API FastAPI + WebSocket)
+- ✅ Feedback visuel (UI React)
+- ✅ Archétypes internes → moteur d'alignement symbolique
+- ✅ Stripe intégré (abonnement simple)
+- ✅ Conforme RGPD (pas de stockage brut, uniquement embeddings temporaires)
+
+### �️ Roadmap
+
+- ✅ **Phase 1** : Analyse texte + audio
+- ⏳ **Phase 2** : Analyse vidéo (micro-expressions, posture)
+- ⏳ **Phase 3** : API publique (intégration apps tierces)
+- ⏳ **Phase 4** : Extensions (Zoom / Teams, Batch médias)
+
+### 💳 Tarifs (Phase 1)
+
+- 👤 **Grand public** (auto-coaching) : 9,99€ / mois
+- 🧑‍🏫 **Coachs** : 39€ / mois
+- 🏢 **B2B RH** : 179€ / mois (jusqu'à 50 utilisateurs)
+- 📰 **Médias / Politique** : 9,99€ / analyse unitaire
+- 🌍 **Entreprise** : devis personnalisé
+
+*Phase 2 (vidéo) : +10€/mois optionnel.*
+
+### 🤝 Soutien & Sponsors
+
+Ce projet est né d'une quête personnelle : recréer un pont sain entre l'humain et l'IA.
+
+Vous pouvez :
+- 💙 **Devenir sponsor GitHub** → [Lien Sponsors](https://github.com/sponsors/Djabolum)
+- 🌱 **Soutenir le développement** → vos contributions accélèrent la V2 (vidéo + API publique).
+
+**Tiers proposés :**
+- `5€/mois` → Supporter (remerciements, accès news)
+- `15€/mois` → Contributeur (accès bêta + feedback direct)
+- `39€/mois` → Coach Pack
+- `179€/mois` → Entreprise Pack
 
 ---
 
-### 🚀 Évolution du projet
+## 🇬🇧 English Version
 
-#### ✅ Déjà réalisé
+### 🌿 Cordée-Authentic
+**The Emotional Clarity Engine**
 
-- Archétypes internes (propre à Cordée)
-- API FastAPI (text/audio)
-- Intégration Stripe (abonnements B2C/B2B)
-- Frontend React minimal (recording, scoring, feedback)
-- Respect RGPD (pas de stockage brut)
+Cordée-Authentic is a hybrid AI system built to analyze emotional authenticity in text, audio (and soon video).
 
-#### 🛠️ En cours
+It is designed for both:
+- 👤 **Individuals**: self-introspection, coaching yourself, bringing truth back into conversations,
+- 💼 **Professionals**: coaches, HR teams, media analysts, enterprises.
 
-- Tests API (texte + audio)
-- Dashboard simple pour coachs / RH
-- Première mise en ligne (démo cloud)
+### 🚀 Why Cordée-Authentic?
 
-#### 📅 À venir
+In a world of over-optimized and "fake sincere" discourse, Cordée-Authentic helps to:
 
-- Phase 2 : analyse vidéo (micro-expressions, posture)
-- Phase 3 : API publique (apps tierces)
-- Phase 4 : extensions (Zoom/Teams, batch médias)
-- Phase 5 : internationalisation (EN/ES)
+- **Detect** alignment or tension signals (voice, text, soon micro-expressions),
+- **Provide** authenticity feedback for coaching, introspection or analysis,
+- **Offer** a clear dashboard for individuals and professionals alike.
 
----
+> *"Your words carry weight. Let's measure it with meaning."*
 
-### 💳 Tarifs (Cordée-Authentic Phase 1)
+### 🤖 Features
 
-- Grand public (auto-coaching) : 14,99€/mois
-- B2C (coaching individuel / coachs) : 39€/mois
-- B2B (RH / bien-être) : 179€/mois (50 utilisateurs inclus)
-- Politique / Médias : 9,99€/analyse unitaire
-- Entreprise : devis personnalisé
+- ✅ Real-time text + audio analysis (FastAPI + WebSocket)
+- ✅ Visual feedback (React UI)
+- ✅ Internal archetypes → symbolic alignment engine
+- ✅ Stripe integration (subscriptions)
+- ✅ GDPR-compliant (no raw data storage, only transient embeddings)
 
----
+### 🛣️ Roadmap
 
-### 🤝 Soutenir le projet
+- ✅ **Phase 1**: Text + Audio
+- ⏳ **Phase 2**: Video (micro-expressions, posture)
+- ⏳ **Phase 3**: Public API (apps, third-party integration)
+- ⏳ **Phase 4**: Extensions (Zoom / Teams, Batch media)
 
-Cordée-Authentic est en partie sponsorisé par la communauté.
-En devenant sponsor GitHub, vous soutenez le développement d'une IA éthique qui replace la **sincérité** au cœur de nos échanges.
+### 💳 Pricing (Phase 1)
 
-👉 [💜 Devenir sponsor](https://github.com/sponsors/Djabolum)
+- 👤 **Individuals** (self-coaching): €9.99 / month
+- 🧑‍🏫 **Coaches**: €39 / month
+- 🏢 **HR / B2B**: €179 / month (up to 50 users)
+- 📰 **Media / Political**: €9.99 / per-analysis
+- 🌍 **Enterprise**: custom quote
+
+*Phase 2 (video): optional +€10/month.*
+
+### 🤝 Support & Sponsors
+
+This project was born out of a personal journey: rebuilding a healthy bridge between humans and AI.
+
+You can:
+- � **Become a GitHub Sponsor** → [Sponsor Link](https://github.com/sponsors/Djabolum)
+- 🌱 **Support development** → your contributions accelerate V2 (video + API).
+
+**Tiers:**
+- `€5/month` → Supporter (thank you + news access)
+- `€15/month` → Contributor (beta access + feedback)
+- `€39/month` → Coach Pack
+- `€179/month` → Enterprise Pack
 
 ---
 

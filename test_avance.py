@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Test avancé des fonctionnalités du système d'archétypes.
+🧪 Test avancé des fonctionnalités du système d'archétypes.
 """
 import sys
 import os

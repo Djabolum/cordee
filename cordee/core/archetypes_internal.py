@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Any
 
 __all__ = ["ARCHETYPES", "get_archetype"]
 
@@ -142,7 +142,7 @@ ARCHETYPES: List[Archetype] = [
 ]
 
 
-def get_archetype(key: str) -> Archetype | None:
+def get_archetype(key: str) -> Any:
     for a in ARCHETYPES:
         if a.key == key:
             return a

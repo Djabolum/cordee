@@ -37,3 +37,6 @@ index/
 Thumbs.db
 *.swp
 *.bak
+
+# Nested repo to ignore
+cordee/

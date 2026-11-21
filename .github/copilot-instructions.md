@@ -40,7 +40,7 @@ make hooks
 - Follow existing code style and patterns in the repository
 
 ### Testing Requirements
-- **Minimum coverage**: 70% (enforced in CI)
+- **Local coverage target**: 70% enforced by `make ci-local`; the main GitHub Actions workflow collects coverage but currently does not enforce a minimum.
 - **CI mode**: Tests run in offline mode with `CORDEE_CI=1` to avoid downloading models
 - Run tests locally: `CORDEE_CI=1 pytest -q`
 - Run tests with coverage:
@@ -55,6 +55,10 @@ Run the full CI suite locally before pushing:
 ```bash
 make ci-local  # Runs lint + format check + tests + e2e smoke tests
 ```
+
+## Public repository scope
+
+This repository contains a minimal RAG API with exactly three current routes (`/health`, `/upsert`, `/query`) and two separate experimental archetype modules in `cordee/core/`. The ten archetype definitions are public source code, but no ritual, archetype or emotional API endpoint is provided. Do not describe this repository as the complete current Cordée / AI-ZI-ME application, or claim implemented voice, video, React, Stripe, subscriptions, GDPR compliance, or production readiness.
 
 ## Architecture Guidelines
 
@@ -90,9 +94,9 @@ make ci-local  # Runs lint + format check + tests + e2e smoke tests
 4. **Pre-commit checks**: Ensure hooks pass before pushing
 
 ### Branch Strategy
-- **Main branch**: `main` (protected, requires CI + review)
+- **Main branch**: `main`; verify the active branch-protection rules and any required CI/reviews on GitHub rather than assuming their configuration.
 - **Feature branches**: Create from `main`
-- **Release tags**: Use `v*` format (protected tags)
+- **Release tags**: Use `v*` format; verify tag protection separately.
 
 ### Security
 - **No secrets in repo**: Use environment files (`/etc/default/*`)

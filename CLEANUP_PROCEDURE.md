@@ -1,4 +1,9 @@
-# Procédure de nettoyage Cordée
+# Procédure de nettoyage Cordée (archive historique)
+
+> **Document historique, non validé comme procédure actuelle.** Il décrit une ancienne opération de nettoyage. Ne pas exécuter aveuglément les scripts Git mentionnés : `scripts/git_cleanup_procedure.sh` doit être relu et corrigé avant tout usage.
+>
+> Les « archétypes internes » désignent des modules **non exposés directement par des routes API**. Leurs dix définitions sont néanmoins **publiques dans le code source de ce dépôt**. Voir [README.md](README.md) pour le périmètre actuellement publié.
+
 
 ## Objectif
 
@@ -9,7 +14,7 @@ Purger toute référence Valexa-Nexus dans Cordée sans casser l'historique, et 
 ```
 cordee/
 ├─ cordee/core/                    # Modules internes
-│  ├─ archetypes_internal.py       # 10 archétypes (privés)
+│  ├─ archetypes_internal.py       # 10 archétypes (internes à l'application, mais source publique)
 │  ├─ emotional_engine.py          # Moteur de priming interne
 │  └─ __init__.py
 ├─ tests/                          # Tests unitaires
@@ -42,7 +47,7 @@ cordee/
 - ✅ Aucun endpoint n'expose le contenu des archétypes
 - ✅ `archetypes_internal.py` en lecture seule (import interne uniquement)
 - ✅ Tests/CI fonctionnels
-- ✅ Aucune référence Valexa/Nexus
+- ⚠️ La recherche de références Valexa/Nexus est une tâche historique à revalider
 
 ## Usage interne du moteur
 
